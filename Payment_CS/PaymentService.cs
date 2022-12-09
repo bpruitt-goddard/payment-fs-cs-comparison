@@ -24,7 +24,7 @@ public class CashPayment : PaymentBase
 	}
 
 	public override string GetPaymentSummary() =>
-		$"Cash payment of {Amount} received.";
+		$"Cash payment of {Amount} received";
 }
 
 public static class PaymentService_CS
@@ -38,7 +38,7 @@ public static class PaymentService_CS
 
 		if (payment.IsValid())
 		{
-			return payment.GetPaymentSummary();
+			return $"Payment processed: {payment.GetPaymentSummary()}";
 		}
 
 		return $"Invalid payment: {payment.Error}";

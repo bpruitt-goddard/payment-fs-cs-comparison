@@ -24,8 +24,11 @@ public class UnitTest1
         var validAmount = 35;
 
         var res_fs = PaymentService_FS.processPaymentCash(validAmount);
+        var res_cs = PaymentService_CS.ProcessPaymentCash(validAmount);
+
 
         var expectedResponse = $"Payment processed: Cash payment of {validAmount} received";
         Assert.Equal(expectedResponse, res_fs);
+        Assert.Equal(res_fs, res_cs);
     }
 }

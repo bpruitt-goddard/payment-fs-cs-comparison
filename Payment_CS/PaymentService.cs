@@ -54,20 +54,13 @@ public class CreditCardPayment : PaymentBase
 
 public static class PaymentService_CS
 {
-	public static string ProcessPayment(PaymentBase payment)
-	{
-		if (payment is null)
+	public static string ProcessPayment(PaymentBase payment) =>
+		payment switch
 		{
-			return "Invalid payment";
-		}
-
-		if (payment.IsValid())
-		{
-			return $"Payment processed: {payment.GetPaymentSummary()}";
-		}
-
-		return $"Invalid payment: {payment.Error}";
-	}
+			_ when payment is null => "Invalid payment",
+			_ when payment.IsValid() =>$"Payment processed: {payment.GetPaymentSummary()}",
+			_ => $"Invalid payment: {payment.Error}",
+		};
 
 	public static string ProcessPaymentCash(decimal amount) =>
 		ProcessPayment(new CashPayment(amount));

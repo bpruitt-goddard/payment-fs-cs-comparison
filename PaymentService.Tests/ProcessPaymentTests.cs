@@ -15,6 +15,15 @@ public class UnitTest1
         var expectedResponse = "Invalid payment: Cash must be a positive amount";
         Assert.Equal(expectedResponse, res_fs);
     }
+
+    [Fact]
+    public void ValidCashReturnsSuccess()
+    {
+        var validAmount = 35;
+
+        var res_fs = PaymentService_FS.processPaymentCash(validAmount);
+
+        var expectedResponse = $"Payment processed: Cash payment of {validAmount} received";
         Assert.Equal(expectedResponse, res_fs);
     }
 }

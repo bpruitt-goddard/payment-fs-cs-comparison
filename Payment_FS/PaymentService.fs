@@ -22,7 +22,7 @@ module PaymentService_FS =
         match payment with
         | Ok p ->
             let result = processPayment p
-            sprintf $"Cash payment processd: {result}"
+            sprintf $"Payment processed: {result}"
         | Error msg ->
             sprintf $"Invalid payment: {msg}"
 

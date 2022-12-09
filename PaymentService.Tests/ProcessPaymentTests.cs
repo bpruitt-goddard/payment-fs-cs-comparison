@@ -39,9 +39,11 @@ public class UnitTest1
         var amount = 17;
 
         var res_fs = PaymentService_FS.processPaymentCreditCard(invalidCreditCard, amount);
+        var res_cs = PaymentService_CS.ProcessPaymentCreditCard(invalidCreditCard, amount);
 
         var expectedResponse = $"Invalid payment: Invalid credit card number: {invalidCreditCard}";
         Assert.Equal(expectedResponse, res_fs);
+        Assert.Equal(res_fs, res_cs);
     }
 
     [Fact]

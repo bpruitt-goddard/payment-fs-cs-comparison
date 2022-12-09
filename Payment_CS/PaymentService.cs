@@ -2,20 +2,14 @@
 
 namespace Payment_CS;
 
-public abstract class PaymentBase
+public abstract record PaymentBase(decimal Amount)
 {
-	public decimal Amount { get; set; }
-	public string Error { get; set; }
+	public string? Error { get; set; }
 	public abstract bool IsValid();
 	public abstract string GetPaymentSummary();
 }
-public class CashPayment : PaymentBase
+public record CashPayment(decimal Amount) : PaymentBase(Amount)
 {
-	public CashPayment(decimal amount)
-	{
-		Amount = amount;
-	}
-
 	public override bool IsValid()
 	{
 		if (Amount >= 0)
@@ -29,15 +23,9 @@ public class CashPayment : PaymentBase
 		$"Cash payment of {Amount} received";
 }
 
-public class CreditCardPayment : PaymentBase
+public record CreditCardPayment(string CreditCardNumber, decimal Amount) : PaymentBase(Amount)
 {
 	public const string ccRegex = @"\d\d\d\d-\d\d\d\d-\d\d\d\d-\d\d\d\d";
-	public string CreditCardNumber { get; set; }
-	public CreditCardPayment(string ccNum, decimal amount)
-	{
-		CreditCardNumber = ccNum;
-		Amount = amount;
-	}
 
 	public override bool IsValid()
 	{
@@ -58,7 +46,7 @@ public static class PaymentService_CS
 		payment switch
 		{
 			_ when payment is null => "Invalid payment",
-			_ when payment.IsValid() =>$"Payment processed: {payment.GetPaymentSummary()}",
+			_ when payment.IsValid() => $"Payment processed: {payment.GetPaymentSummary()}",
 			_ => $"Invalid payment: {payment.Error}",
 		};
 

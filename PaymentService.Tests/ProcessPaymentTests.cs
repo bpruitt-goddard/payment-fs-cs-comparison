@@ -31,4 +31,28 @@ public class UnitTest1
         Assert.Equal(expectedResponse, res_fs);
         Assert.Equal(res_fs, res_cs);
     }
+
+    [Fact]
+    public void InvalidCreditCardReturnsError()
+    {
+        var invalidCreditCard = "1234";
+        var amount = 17;
+
+        var res_fs = PaymentService_FS.processPaymentCreditCard(invalidCreditCard, amount);
+
+        var expectedResponse = $"Invalid payment: Invalid credit card number: {invalidCreditCard}";
+        Assert.Equal(expectedResponse, res_fs);
+    }
+
+    [Fact]
+    public void ValidCreditCardReturnsSuccess()
+    {
+        var validCreditCard = "1234-5678-9012-3456";
+        var amount = 17;
+
+        var res_fs = PaymentService_FS.processPaymentCreditCard(validCreditCard, amount);
+
+        var expectedResponse = $"Payment processed: Credit card payment of {amount} received via credit card {validCreditCard}";
+        Assert.Equal(expectedResponse, res_fs);
+    }
 }

@@ -53,8 +53,10 @@ public class UnitTest1
         var amount = 17;
 
         var res_fs = PaymentService_FS.processPaymentCreditCard(validCreditCard, amount);
+        var res_cs = PaymentService_CS.ProcessPaymentCreditCard(validCreditCard, amount);
 
         var expectedResponse = $"Payment processed: Credit card payment of {amount} received via credit card {validCreditCard}";
         Assert.Equal(expectedResponse, res_fs);
+        Assert.Equal(res_fs, res_cs);
     }
 }

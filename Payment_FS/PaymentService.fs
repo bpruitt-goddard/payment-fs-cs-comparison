@@ -24,7 +24,7 @@ module PaymentService_FS =
             let result = processPayment p
             sprintf $"Cash payment processd: {result}"
         | Error msg ->
-            sprintf $"Invalid cash payment: {msg}"
+            sprintf $"Invalid payment: {msg}"
 
 
     let add num1 num2 = num1 + num2

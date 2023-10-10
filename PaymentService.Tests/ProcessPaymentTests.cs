@@ -12,6 +12,8 @@ public class UnitTest1
 
         var res_fs = PaymentService_FS.processPaymentCash(invalidAmount);
         var res_cs = PaymentService_CS.ProcessPaymentCash(invalidAmount);
+        // Using Value Options from c# is clunky
+        // var cash_fs = PaymentService_FS.Payment.NewCash(15m);
 
         var expectedResponse = "Invalid payment: Cash must be a positive amount";
         Assert.Equal(expectedResponse, res_fs);
